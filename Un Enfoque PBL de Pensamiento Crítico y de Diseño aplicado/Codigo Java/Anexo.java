@@ -573,17 +573,7 @@ case "4":
         // Guarda los datos del ticket en un archivo CSV
         GuardarDatosCsvVentaTicket(Vticket, narchivo, ObtenerUltimaPosicion(Vticket), idticket);
 
-        // Genera una fila en formato CSV con los datos de la venta y la guarda en el archivo de ventas
-        String cadena = generarCSVFilaVenta(
-            fechadia, 
-            idticket, 
-            String.format("%.2f", SubTotalTicket(Vticket)), 
-            String.format("%.2f", IvaTicket(Vticket)), 
-            String.format("%.2f", TotalTicket(Vticket))
-        );
-        GuardarDatosCsvVentas("ventas.csv", cadena);
-    }
-					}
+ 					}
 				
 					pago = true;
 					opcion = "5";
