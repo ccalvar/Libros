@@ -1,0 +1,178 @@
+Algoritmo Cargar Productos 
+1.	La función  recibe un parámetro solo para C++ 
+string(*productos)[4]  , recuerda que en C++ es un puntero a un array de 4 strings. Es una forma de declarar un puntero que apunta a filas de una matriz bidimensional donde cada fila tiene exactamente 4 columnas
+2.	Crear Matriz solo en Java,C#,Js,Python
+1.	String [][] producto = new String[10][4];
+2.	string[,] producto = new string[10, 4]; 
+3.	const producto = new Array(10, 3); 
+4.	producto = [[None for _ in range(3)] for _ in range(10)] 
+3.	Relleno de la Matriz:
+Llena la fila 0 (primer producto):
+Columna 0: Guarda código "001"
+Columna 1: Guarda nombre "Arroz 1kg"
+Columna 2: Guarda precio "35"
+Columna 3: Guarda stock "10"
+Llena la fila 1 (segundo producto):
+Columna 0: "002"
+Columna 1: "Azúcar 1kg"
+Columna 2: "25"
+Columna 3: "10"
+Llena la fila 2 (tercer producto):
+Columna 0: "003"
+Columna 1: "Harina 1kg"
+Columna 2: "28"
+Columna 3: "10"
+Llena la fila 3 (cuarto producto):
+Columna 0: "004"
+Columna 1: "Aceite 1L"
+Columna 2: "50"
+Columna 3: "10"
+Llena la fila 4 (quinto producto):
+Columna 0: "005"
+Columna 1: "Leche 1L"
+Columna 2: "35"
+Columna 3: "10"
+Llena la fila 5 (sexto producto):
+Columna 0: "006"
+Columna 1: "Huevos 12 unidades"
+Columna 2: "45"
+Columna 3: "10"
+Llena la fila 6 (séptimo producto):
+Columna 0: "007"
+Columna 1: "Fideos 500g"
+Columna 2: "20"
+Columna 3: "10"
+Llena la fila 7 (octavo producto):
+Columna 0: "008"
+Columna 1: "Sal 1kg"
+Columna 2: "15"
+Columna 3: "10"
+Llena la fila 8 (noveno producto):
+Columna 0: "009"
+Columna 1: "Pasta de tomate 400g"
+Columna 2: "25"
+Columna 3: "10"
+Llena la fila 9 (décimo producto):
+Columna 0: "010"
+Columna 1: "Atún lata 170g"
+Columna 2: "35"	
+Columna 3: "10"
+4.	Regreso de Valor 
+Regresar la Matriz solo para Java ,C#,Js y Python (producto)
+
+
+Algoritmo Cargar Productos  
+1.	La función  no recibe un parámetro 
+2.	Crear Matriz  y Rellenar solo en Java,C#,Js,Python
+String [][] producto = { 
+Fila 0        { "001", "Arroz 1kg", "35","10" },
+Fila 1        { "002", "Azúcar 1kg", "25","10" },
+Fila 2        { "003", "Harina 1kg", "28","10" },
+Fila 3        { "004", "Aceite 1L", "50","10" },
+Fila 4        { "005", "Leche 1L", "35","10" },
+Fila 5        { "006", "Huevos 12 unidades","10" "45" },
+Fila 6        { "007", "Fideos 500g", "20" ,"10"},
+Fila 7        { "008", "Sal 1kg", "15","10" },
+Fila 8        { "009", "Pasta de tomate 400g", "25" ,"10"},
+Fila  9       { "010", "Atún lata 170g", "35" ,"10"}
+    };
+3.	Regresar la Matriz solo para Java ,C#,Js y Python
+Regresar producto
+
+
+Algoritmo MostrarProducto 
+1.	La función   recibe un parámetro
+ Se recibe un arreglo de String llamado vproducto, que contiene los datos del producto
+2.	Relleno de Espacios con los datos del arreglo
+•	Creamos una variable llamada código y hacemos uso de la función RellenarEspacios y le pasamos el primer elemento del arreglo vproducto[0] y  el numero de espacios en este caso 5
+•	Creamos una variable llamada producto y hacemos uso de la función RellenarEspacios y le pasamos el segundo elemento del arreglo vproducto[1] y  el numero de espacios en este caso 30
+•	Creamos una variable llamada precio y hacemos uso de la función RellenarEspacios y le pasamos el primer elemento del arreglo vproducto[2] y  el numero de espacios en este caso 10
+•	Creamos una variable llamada cantidad y hacemos uso de la función RellenarEspacios y le pasamos el primer elemento del arreglo vproducto[3] y  el numero de espacios en este caso 10
+3.	Concatenación de Datos:
+Se crea una variable llamada cadena (cadena) que concatena  los valores de las variables  codigo, producto, precio y cantidad, organizándolos en una sola línea.
+4.	Regresar Una Cadena
+Se devuelve el valor de la variable  cadena, que representa la información del producto en un formato claro , legible y tabulado.
+
+
+Algoritmo MostrarLista   
+1.	La función   recibe un parámetro
+ Se recibe una matriz de String llamada vproductos, que contiene los datos de varios productos.
+2.	Declaracion de Variables
+Se declara una variable de tipo cadena llamada salida , en la cual concatenaremos toda la matriz vproductos.
+3.	Recorrido de la Matriz:
+•	Se inicia un bucle que itera a través de cada fila de la matriz vproductos (hasta 10 filas en este caso).
+•	Extracción de Datos:
+En cada iteración, se extraen los datos del producto correspondiente a la fila actual y se almacenan en un arreglo vproducto, al cual se le asigna los valores  de código, nombre, precio y cantidad del producto 
+•	Creamos una variable de tipo string llamada cadena en la cual guardaremos el resultado de llamar a la funcion MostrarProducto, pasándole el arreglo vproducto.
+•	Concatenación de Resultados
+La cadena formateada se concatena con variable salida, seguida de un salto de línea para separar cada producto visualmente.
+4.	Regresar Una Cadena
+Se devuelve el valor de la variable  cadena, que representa la información del producto en un formato claro, legible y tabulado.
+
+
+Algoritmo ExisteProducto  
+1.	La función   recibe dos parámetro
+Un String llamado codigo, que representa el código del producto a buscar.
+Una matriz de String llamada vproductos, que contiene los datos de varios productos..
+2.	Declaracion de Variables
+enc: Inicializado en -1, indica que el producto no se ha encontrado.
+pos: Inicializado en 0, será la posición actual en la matriz.
+tam: Almacena el tamaño (número de filas) de la matriz vproductos.
+ciclo: Variable de control para el bucle que recorrerá la matriz..
+3.	Cálculo del Tamaño:
+Se calcula el tamaño de la matriz vproductos y se almacena en tam
+4.	Recorrido de la Matriz para realizar la búsqueda secuencial
+Se recorre cada fila de la matriz vproductos:
+Se compara el código del producto actual (vproductos[ciclo][0]) con el código buscado (codigo.trim(), que elimina espacios en blanco).
+Si hay coincidencia, se asigna la posición actual (pos) a enc.
+Incremento de Posición:
+Se incrementa pos en cada iteración para preparar la siguiente búsqueda.
+5.	Regresar el Valor de la búsqueda
+se devuelve el valor de enc, que será la posición del producto encontrado o -1 si no se encontró.
+
+
+Algoritmo ModificarProducto 
+1.	El procedimiento recibe un parámetro
+Se recibe una matriz de String llamada vproductos, que contiene los datos de varios productos 
+2.	Declaracion de Variables
+codigo: almacenara el código del producto a modificar
+ precio : almacenara el nuevo precio del producto que actualizara 
+posición:   almacenara la posición del producto en la matriz, respectivamente
+3.	Mostrar Lista de Productos:
+Se llama al método MostrarLista(vproductos) para obtener y mostrar la información de la lista de productos.
+4.	Entrada del Usuario:
+Se solicita al usuario que introduzca el código del producto que desea modificar, utilizando el método Leer.
+5.	Verificación de Código:
+Se comprueba si el código ingresado no es null. 
+Si es válido, se busca la posición del producto en la matriz utilizando ExisteProducto.
+Si es null muestra un mensaje y termina la operación
+6.	Modificación del Precio del Producto:
+Si el producto se encuentra (es decir, posición es mayor que -1), 
+se crea un arreglo vproducto con la información actual del producto.
+Se solicita al usuario que introduzca el nuevo precio.
+Si no se encuentra muestra un mensaje que el código no existe y termina la operación
+7.	Validación del Precio:
+Se verifica si el precio ingresado no es null. 
+Si es válido, se comprueba que el precio sea un valor numérico utilizando EvaluarNumerico.
+Si es numérico, se actualiza el precio en la matriz vproductos.
+Si no es valido muestra un mensaje indicándolo termina la operación
+Si el dato es null muestra un mensaje indicándolo  termina la operación
+8.	Manejo de Errores:
+Se manejan diferentes mensajes de error para situaciones como código nulo, producto no encontrado, o precio no numérico.
+
+
+Actualización del Procedimiento MenuProducto  
+1.	El Procedimiento recibirá un  Parametro 
+vproductos  que es la matriz de productos, lo que permite manejar una lista de productos.
+2.	Actualización de las Opciones 1 y 2
+En la opción se llamara al procedimiento ModificarProducto(vproductos) 
+En la opción 2 se realizara una salida de consola para  mostrar la lista de productos utilizando la funcion MostrarLista(vproductos).
+
+
+Reestructuración del procedimiento MenuPrincipal
+1.	Agregaremos un parámetro que represente a la matriz productosRecibir un Parametro vproductos  sera una matriz de productos, lo que permite manejar una lista de productos.
+2.	Adecuáremos la Opción 1 
+Las acciones de la opción 1  pasaran de imprimir un mensaje de texto a llamar procedimiento Llamar al procedimiento de MenuProductos (vproductos) 
+
+
+
