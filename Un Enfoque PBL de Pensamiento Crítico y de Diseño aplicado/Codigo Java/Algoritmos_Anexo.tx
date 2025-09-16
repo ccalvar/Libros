@@ -1,1 +1,117 @@
+Algoritmo de ExisteArchivo
+1.	La funcion Recibe un parámetro
+Narchivo que es el nombre del archivo que se buscara
+2.	Evalua si existe el archivo  
+3.	Retorno de valor
+Si existe regresa un verdadero
+Si no existe regresa falso
+
+Algoritmo EscribirArchivoCSV     
+1.	El procedimiento  recibe dos parámetros
+Matriz de los datos a guardar
+Nombre del archivo. 
+2.	Abrir archivo CSV en modo escritura
+Si el archivo no existe, se crea el archivo con los datos
+Si ya existe
+se agregan los datos al final, sin borrar lo previo
+
+
+Algoritmo generarCVSFilaTicket
+1.	La función   recibe cinco parámetros
+Idticket de tipo cadena
+dato1: Una cadena que representa idproducto
+dato2: Una cadena al producto
+dato3: Una cadena que representa precio
+dato4: Una cadena que representa la cantidad 
+2.	Retorno de Valor
+Concatena todos los elementos separados por “,” en este orden: idticket + dato1 + dato2 + dato3 + dato4 + resultado_de_TotalProducto( dato3,dato4)
+
+
+Algoritmo GuardarDatosCsvVentaTicket
+1.	El procedimiento recibe cuatro parámetros
+o	matriz: un arreglo bidimensional que contiene los datos a procesar.
+o	nombrearchivo: el nombre o ruta del archivo CSV donde se guardarán los datos.
+o	filas: el número de filas de la matriz que serán procesadas.
+o	idticket: un identificador único asociado a cada registro.
+2.	Inicializar la cadena acumuladora:
+o	Se crea una variable vacía llamada cadena, la cual almacenará todas las filas en formato CSV.
+3.	Recorremos la matriz:
+o	Para cada fila (hasta filas):
+	Se genera una cadena formateada en CSV utilizando los datos de la fila y el idticket.  Esto se realiza llamando a la función generarCVSFilaTicket.
+	La cadena generada se concatena con un salto de línea (\n) a la variable cadena.
+	Opcionalmente, se imprime el contenido generado en la consola.
+4.	Guardamos datos en el archivo:
+o	Llamar al método EscribirArchivoCSV, pasando como parámetros nombrearchivo y la cadena acumulada (cadena). 
+
+
+Algoritmo LeerDatosCSV
+1.	La función  recibe un parámetro
+nombrearchivo: el nombre o ruta del archivo CSV donde se guardarán los datos.
+2.	Declaración e inicialización de Variables
+primerDato:cadena  y se inicializa como una cadena de texto vacía
+3.	Abre el archivo especificado por el parámetro
+4.	Recorre el archivo línea por línea hasta el final.
+	Elimina los espacios de la fila obtenida
+	Evalúa si la fila no está vacía
+1.	Convierte la fila(cadena) a un arreglo tipo cadena
+2.	Extrae el dato de la primera columna lo guarda. El primer elemento de ese arreglo (índice [0]) se guarda en la variable primerDato. Cada vez que se procesa una nueva línea válida, este valor se sobrescribe, por lo que al final solo quedará el dato de la última línea que se leyó.
+5.	Guardamos datos en el archivo:
+o	Llamar al método EscribirArchivoCSV, pasando como parámetros nombrearchivo y la cadena acumulada (cadena). 
+6.	Retorno de Valor
+la cadena primerDato.
+
+Algoritmo GenerarCSVFilaVenta
+1.	La función   recibe cinco parámetros
+String: dato1, dato2, dato3, dato4, y dato5
+dato1:fecha
+dato2:idticket
+	dato3:total del iva
+dato4:subtotal
+d:total
+2.	Declaración e inicialización de Variables
+cadena: Una variable de tipo String que se inicializa como una cadena vacía.
+3.	Concatena los datos de los parámetros en cadena
+Los concatena en una sola cadena de texto , agrega comas entre cada dato ,Agrega un salto de línea  al final de la cadena.
+4.	Retorno de Valor 
+ la cadena de texto completa que ya está formateada para ser una línea en el archivo CSV.
+
+Algoritmo GuardarDatosCsvVentas
+1.	El procedimiento recibe dos parámetros
+nombrearchivo: Cadena el nombre o ruta del archivo CSV donde se guardarán los datos.
+contenido: una cadena de texto que contiene los datos a guardar.
+2.	Verificación de archivo:
+Llama al método 
+EscribirArchivoCSV, pasándole el nombrearchivo y el contenido como parámetros.
+Este método se encarga de escribir el contenido en el archivo, agregándolo al final si ya existe, sin sobrescribir los datos anteriores.
+
+
+Algoritmo de la actualización MenuPuntoVenta
+El algoritmo de MenuPuntoVenta se actualizó para incluir la persistencia de datos en archivos.
+1.	Parámetros:
+o	Se agregó un nuevo parámetro: narchivo (cadena de texto) representa el nombre del archivo de la venta del día , que es la fecha del día
+2.	Proceso de Pago:
+o	Dentro de la opción "Pagar", agregamos los siguientes pasos adicionales para guardar la venta:
+o	Evaluamos si tenemos información en el ticket si es así :
+	Guarda los detalles del ticket actual en un archivo con el nombre del día (narchivo).
+	Genera una cadena de texto con el resumen de la venta (fecha, ID del ticket, subtotal, IVA, y total).
+	Guarda esta cadena en un archivo llamado "ventas.csv".
+
+
+Actualización de MenuPrincipal
+Se actualiza sin modificar parámetros
+1.	Se establece el Nombre del Archivo antes del ciclo del menu:
+Se genera el nombre del archivo del día actual (narchivo).
+2.	Obtención del ID del Ticket:
+Se verifica si el archivo del día (narchivo) ya existe.
+Si el archivo existe, el algoritmo lee el último ID de ticket guardado en él.
+Si el archivo no existe o el ID leído está vacío, el algoritmo obtiene el último ID de la matriz de ventas en memoria (vventas). Esto asegura que la numeración del ticket sea continua.
+3.	En la opción 2 Llamada a MenuPuntoVenta:
+Se pasa el nombre del archivo (narchivo) como un nuevo parámetro al llamar a la función MenuPuntoVenta.
+4.	Gestión del ID del Ticket dentro de la opción 2 :
+Después de que MenuPuntoVenta se ejecuta, el valor del idticket se restablece a null para forzar la búsqueda de un nuevo ID al regresar al menú principal.
+
+
+
+
+
 
