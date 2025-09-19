@@ -1,0 +1,90 @@
+Algoritmo: EvaluarNumerico (Función)
+
+Propósito: Determina si una cadena representa un número entero, decimal o es inválida
+
+Parámetro de entrada: dato (Texto)
+Valor de retorno: "entero", "decimal" o "invalido"
+Verificar cadena vacía:
+Si el dato es nulo o está vacío después de quitar espacios
+Retornar "invalido"
+Preparar el dato:
+Eliminar espacios al inicio y final del texto
+Inicializar banderas: tienePunto (falso) y tieneDigito (falso)
+Examinar cada carácter:
+Para cada carácter en el texto limpio:
+Si es un dígito: marcar tieneDigito como verdadero
+Si es un punto decimal:
+Verificar si ya hay punto, o si está al inicio/final
+Si alguna condición se cumple: retornar "invalido"
+Sino: marcar tienePunto como verdadero
+Si es un signo negativo:
+Verificar que esté en la primera posición
+Si no está primero: retornar "invalido"
+Si es cualquier otro carácter: retornar "invalido"
+Verificar resultado final:
+Si no se encontró ningún dígito: retornar "invalido"
+Si tiene punto: retornar "decimal"
+Si no tiene punto: retornar "entero"
+
+
+Algoritmo: EsEntero (Función)
+Propósito: Verifica si una cadena representa un número entero válido
+Parámetro de entrada: dato (Texto)
+Valor de retorno: Verdadero o Falso
+Llamar a EvaluarNumerico: con el dato como parámetro
+Comparar resultado: si el resultado es igual a "entero"
+Retornar: verdadero si es entero, falso en caso contrario
+
+
+Algoritmo: EsDecimal (Función)
+Propósito: Verifica si una cadena representa un número decimal válido
+Parámetro de entrada: dato (Texto)
+Valor de retorno: Verdadero o Falso
+Llamar a EvaluarNumerico: con el dato como parámetro
+Comparar resultado: si el resultado es igual a "decimal"
+Retornar: verdadero si es decimal, falso en caso contrario
+
+Algoritmo: EsNumerico (Función)
+Propósito: Verifica si una cadena representa un número válido (entero o decimal)
+Parámetro de entrada: dato (Texto)
+Valor de retorno: Verdadero o Falso
+Llamar a EvaluarNumerico: con el dato como parámetro
+Comparar resultado: si el resultado es igual a "entero" O igual a "decimal"
+Retornar: verdadero si es numérico, falso en caso contrario
+
+Algoritmo: Dialogo (Función)
+Propósito: Muestra un mensaje y lee una línea de texto desde la consola
+Parámetro de entrada: texto (Texto a mostrar)
+Valor de retorno: Texto (null, vacío o con información)
+Mostrar mensaje: imprimir el texto seguido de dos puntos
+Intentar leer entrada:
+Preparar para leer desde el teclado
+Leer una línea de texto
+Manejar resultados:
+Si no se pudo leer: mostrar error y retornar null
+Si se leyó texto vacío: retornar cadena vacía
+Si se leyó texto válido: retornar el texto
+Manejar errores: en caso de error de lectura, mostrar mensaje y retornar null
+
+Algoritmo: Leer (Función)
+Propósito: Solicita y valida datos numéricos del usuario
+Parámetros de entrada: textoDialogo (Texto), tipoDato ("entero", "decimal" o "numerico")
+Valor de retorno: Texto (null, vacío o dato válido)
+Inicializar variables: dato (texto), datoValido (falso)
+Bucle de validación: repetir hasta obtener dato válido o error
+Solicitar dato: llamar a Dialogo con textoDialogo
+Verificar respuesta:
+Si es null: retornar null (error)
+Si está vacío: retornar vacío (sin información)
+Validar formato numérico:
+Limpiar espacios del dato
+Evaluar según tipoDato solicitado:
+Para "entero": debe ser evaluación "entero"
+Para "decimal": debe ser evaluación "decimal"
+Para "numerico": debe ser "entero" o "decimal"
+Manejar resultados:
+Si es válido: terminar bucle y retornar dato
+Si no es válido: mostrar mensaje de error y repetir
+Manejar tipo inválido: si tipoDato no es reconocido, mostrar error y retornar null
+
+
