@@ -1,0 +1,49 @@
+
+Algoritmo AgregarStock 
+1.	El procedimiento recibe un parámetro
+Se recibe una matriz de String llamada vproductos, que contiene la información de los productos.
+2.	Declaración de Variables:
+codigo de tipo cadena para almacenar el código del producto a modificar 
+cantidad tipo cadena que almacenara cantidad que se desea agregar. posicion tipo entero para localizar el producto en la matriz.
+3.	Mostrar Inventario:
+Se llama al método MostrarLista(vproductos) para mostrar la lista de productos disponibles y se almacena en info.
+4.	Entrada del Usuario:
+Se solicita al usuario que introduzca el código del producto utilizando el método Leer, mostrando la lista de productos como contexto.
+5.	Verificación de Código:
+Se comprueba si el código ingresado no es null. 
+Si es válido:
+se busca la posición del código del producto en la matriz usando la funcion ExisteProducto 
+Modificación del Stock: 
+Si el producto se encuentra (es decir, posicion es mayor que -1)
+Se crea un arreglo vproducto con la información del producto, específicamente el código, nombre y cantidad actual.
+Entrada de Cantidad:
+Se solicita al usuario que introduzca la cantidad de stock a agregar, mostrando la información del producto.
+Validación de Cantidad:
+Se verifica si la cantidad ingresada no es null. 
+Si es válida
+se comprueba que sea un valor numérico mediante la función  EvaluarNumerico.
+Cálculo y Actualización de Stock:
+Si la cantidad es numérica, se calcula la nueva cantidad sumando la cantidad ingresada a la cantidad actual del producto. Este nuevo valor se convierte a String y se actualiza en la matriz vproductos.
+Si la cantidad no es numérica muestra una etiqueta "no es un valor numerico"
+Si es null la variable cantidad
+Se muestra una etiqueta “dato nulo”
+Si no existe el código o no se encuentra el producto 
+Se muestra una etiqueta “no existe codigo”
+Si es nulo el código muestra una etiqueta “dato nulo”
+6.	Manejo de Errores:
+Se manejan mensajes de error para situaciones como código nulo, producto no encontrado, o cantidad no numérica, asegurando que el usuario reciba retroalimentación clara.
+
+
+ Algoritmo MenuInventario 
+1.	El procedimiento  recibe un parámetro
+2.	Se agregó manejo de datos (matriz vproductos) al procedimiento MenuInventario como parámetro 
+3.	Actualización de la Opción 1
+Se remplaza el Mensaje de “Listado de Inventario” por desplegar la función MostrarLista(vproductos)
+4.	Actualización de la Opción 2
+Se remplaza el Mensaje de “Agregar Inventario” por ejecutar el procedimiento AgregarStock(vproductos)
+
+
+
+
+
+

@@ -1,0 +1,430 @@
+Algoritmo CrearVenta 
+1.	La función no recibe parámetro
+2.	 Declaración de Variables
+Se utiliza una variable global o de clase llamada tamventas, que especifica el número de ventas que se pueden almacenar.
+3.	Inicialización de la Matriz
+Se crea una matriz de cadenas (String[][]) con el tamaño tamventas en filas y 5 columnas. Cada fila representará una venta y cada columna se utilizará para almacenar diferentes atributos de la venta, como: (Código de producto, Nombre de producto, Cantidad vendida, Precio unitario,Total de la venta)
+4.	Regresar Una Matriz
+Retorna la nueva matriz de ventas creada, que estará disponible para ser utilizada por otras partes del programa.
+
+
+Algoritmo UltimoTicket 
+1.	La función recibe dos parámetros
+ pos: Un entero que representa la posición del ticket en la matriz.
+mventa: Una matriz de cadenas (String[][]) que contiene información sobre las ventas
+2.	Inicialización de la Variable
+Se declara una variable idticket e inicializa con el valor "000". Este valor servirá como valor por defecto en caso de que no se encuentre un ticket válido 
+3.	Verificación de Posición
+Se comprueba si pos es mayor que -1, lo que indica que se ha encontrado una posición válida en la matriz mventa
+4.	Recuperación del Ticket
+Si la posición es válida, se asigna a idticket el valor del ticket correspondiente en la matriz, específicamente en la columna 0 de la fila pos
+5.	Regresar del Valor 
+La función retorna el valor de idticket, que será el ID del último ticket si la posición era válida, o "000" si no se encontró un ticket.
+
+
+Algoritmo CrearTicket 
+1.	La función no recibe parámetros.
+2.	Inicialización de la Matriz
+Se crea una matriz de cadenas (String[][]) con 20 filas y 4 columnas. Cada fila representará un ticket de venta, y cada columna se utilizará para almacenar diferentes atributos del ticket, como: Código de producto, Nombre de producto, Cantidad vendida, Precio unitario
+3.	Retorno de la Matriz
+La función retorna la nueva matriz de tickets creada, que estará lista para ser utilizada por otras partes del programa.
+
+
+Algoritmo ExisteTicketCódigo 
+1.	La Función recibe dos parámetros:
+mticket: Una matriz de cadenas ([][]string) que contiene información sobre los tickets.
+codigo: Una cadena que representa el código del ticket que se desea buscar.
+2.	Inicialización de la Variable:
+Se declara una variable enc e inicializa con el valor -1. 
+Esta variable servirá para indicar si se encontró el ticket (con un índice) o si no se encontró (manteniendo -1).
+3.	Obtención del Tamaño del Arreglo:
+Se llama a la función ObtenerUltimaPosicion para obtener la última posición válida de la matriz mticket.
+4.	Búsqueda del Ticket:
+Se inicia un bucle for que itera desde 0 hasta pos (inclusive). 
+Dentro del bucle:
+Se utiliza strings.TrimSpace para eliminar los espacios en blanco del código del ticket en la posición actual de la matriz (mticket[ciclo][0]) y del código proporcionado.
+Se compara el código del ticket en la posición actual con el código proporcionado.
+Si hay una coincidencia, se asigna el índice actual (ciclo) a enc y se retorna inmediatamente enc.
+5.	Retorno de Valor:
+Si se encuentra una coincidencia, se retorna inmediatamente enc (el índice del ticket encontrado).
+Si no se encuentra ninguna coincidencia después de completar el bucle, se retorna enc (que seguirá siendo -1).
+
+
+Algoritmo InsertarProductoTicket 
+1.	La función   recibe tres parámetros
+mticket: Es la matriz que contiene la información del ticket en cuestión. Esta matriz se pasa por referencia, lo que significa que cualquier cambio que se realice dentro de la función se verá reflejado en la matriz original.
+datos: Es un vector que contiene la información del nuevo producto a insertar. Los elementos de este vector tienen la siguiente estructura:
+datos[0]: Código del producto ,datos[1]: Descripción del producto
+datos[2]: Precio del producto , datos[3]: Cantidad del producto
+tam: Es el tamaño máximo de la matriz mticket. Este parámetro se utiliza para verificar que haya espacio disponible en la matriz para agregar un nuevo registro.
+2.	Se Declaran las variables 
+sucedio de tipo lógico, que se utilizará para indicar si se pudo insertar el nuevo registro.
+variables enteras: v1, v2, posticket y enc.
+3.	Inicializa la variables 
+sucedio a Falso. 
+posticket =  ObtenerUltimaPosicion(mticket)
+4.	Busqueda del Producto mediante el código
+enc= ExisteTicketCodigo pasándole  mticket,  datos[0]  (código de producto). Esta función devuelve la posición del registro en mticket que coincide con el código de producto proporcionados, -1 si no se encuentra ningún registro
+5.	Se verifica si la posición actual pos es menor que el tamaño máximo tam de la matriz mticket.
+Si se encontró un registro existente (es decir, enc es mayor o igual a 0), se realiza lo siguiente:
+Se convierte a número los valores en las columnas 3 de mticket [enc] (cantidad actual) y datos[4] (cantidad nueva), y se suman.
+Se actualiza el valor de la columna 3 en mticket [enc] con la nueva cantidad total.
+Si no se encontró un registro existente (es decir, enc es -1), se realiza lo siguiente:
+Se incrementa la posición pos en 1.
+Se asignan los valores del arreglo datos a las columnas correspondientes de la fila pos en la matriz mticket.
+Finalmente, se asigna el valor verdadero a la variable sucedio para indicar que se pudo insertar el nuevo registro.
+6.	Retorno de Valor
+La función devuelve el valor de sucedio, que indica si se pudo insertar el nuevo registro o no.
+
+
+Algoritmo TotaldelProducto 
+1.	La función recibe un parámetro
+precio: Una cadena (String) que representa el precio unitario del producto.
+cantidad: Una cadena (String) que representa la cantidad del producto.
+2.	Cálculo del Total
+Se convierten las cadenas precio y cantidad a valores de tipo double utilizando Double.parseDouble().
+Se calcula el total multiplicando el precio por la cantidad.
+3.	Formateo del Resultado
+El resultado total se formatea a dos decimales utilizando String.format("%.2f", total), lo que asegura que el output tenga un formato adecuado para representar cantidades monetarias.
+4.	Retorno de Valor
+La funcion retorna el total como una cadena (String), representando el costo total del producto.
+
+
+Algoritmo MostrarProductoTicket  
+1.	La función recibe dos parámetros
+matriz mticket, que contiene los datos de los productos en el ticket
+pos, que indica la posición del producto específico que se desea mostrar.
+2.	Se declaran las variables 
+Cadena: que concatenara ( codigo,producto,precio,cantidad,totalproducto)
+codigo: Llama a la función RellenarEspacios con el valor del código del producto ubicado en mticket[pos][0] y un ancho de 5 caracteres. Esto asegura que el código esté correctamente formateado.
+producto: Llama a la función RellenarEspacios con el valor del código del producto ubicado en mticket[pos][1] y el numero total  de 30 caracteres. 
+precio : Llama a la función RellenarEspacios con el valor del código del producto ubicado en mticket[pos][2] y  el numero total de 10 caracteres 
+cantidad : Llama a la función RellenarEspacios con el valor del código del producto ubicado en mticket[pos][3] y  el numero total de 10 caracteres 
+totalproducto: Se calcula el total del producto llamando a TotalProducto(mticket[pos][2], mticket[pos][3]), que devuelve el total basado en el precio y la cantidad. Luego, se aplica RellenarEspacios con un ancho de 10 caracteres para formatear el total.
+3.	Concatenación de Datos:
+Se  concatena en la variable cadena, los valores de las variables  (codigo, producto, precio, cantidad, totalproducto), organizándolos en una sola línea.
+4.	Regresar de Valor 
+Se devuelve la cadena concatenada, que contiene todos los detalles del producto en un formato legible y estructurado. Se devuelve la cadena de texto concatenada.
+
+
+Algoritmo MostrarTicket 
+1.	La función   recibe un parámetro
+ mticket: Es un vector (o matriz) que contiene la información del ticket en cuestión, contener información como el ID del producto, la cantidad, el precio.
+2.	Declaración de variables:
+pos: resultado de la última posición de la matriz con informacion
+salida: Variable de tipo cadena de texto que almacenará la salida final del algoritmo.
+ciclo: Variable de tipo entero que se utilizará para recorrer los elementos de mticket.
+3.	Inicialización de variables:
+Se le asigna una cadena de texto vacía a la variable salida.
+pos = ObtenerUltimaPosicion(mticket)
+4.	Recorrido del vector mticket:
+•	Se utiliza un bucle para que recorra la matriz mticket desde la posición 0 hasta la posición pos (que se supone es la última posición utilizada en el vector).
+•	Se llama a la función MostrarProductoTicket pasando como parámetros mticket y ciclo, y el resultado se concatena a la variable salida.
+5.	Regresar de Valor
+•	Regresamos el valor de cadena.
+
+
+Algoritmo SubTotaldelTicket 
+1.	La función  recibe dos parámetros 
+mticket: Una matriz que representa el ticket, donde cada fila contiene información sobre un producto vendido la cantidad y el precio.
+pos: Un entero que representa el número de filas (o productos) en la matriz mticket.
+1.	Declaración de variables 
+subtotal y stotal como números double
+ciclo como un entero.
+2.	inicialización de Variables
+subtotal en 0.
+3.	Iniciar un bucle para que recorra las filas de la matriz mticket desde 0 hasta pos  (inclusive).
+Calcula el total de un producto individual utilizando la función TotalProducto(mticket [ciclo,2], mventa[ciclo,3]), que toma la cantidad y el precio del producto y devuelve el total.
+Convertir el resultado de TotalProducto a un número real y asignarlo a la variable stotal.
+stotal=stotal + subtotal
+4.	Retorno de valor
+ subtotal.
+
+
+
+Algoritmo TotalTicket 
+1.	La función recibe un parámetro
+mticket: Una matriz que representa las ventas, donde cada fila contiene información sobre el ticket.
+2.	Declaracion de Variables
+totales, subtotal y stotal como números reales.
+3.	Calcular el subtotal del ticket 
+   subtotal = la función SubTotalTicket(mticket)
+4.	Verificar si el subtotal es mayor a 0.
+Si el subtotal es mayor a 0, entonces:
+Calcular el IVA utilizando la función IvaTicket(mticket) y asignar el resultado a la variable subtotal.
+Sumar el subtotal y el IVA, y asignar el resultado a la variable total.
+Si el subtotal es 0 o negativo, asignar el valor -1 a la variable total.
+5.	Retorno de Valor 
+
+
+Algoritmo MostrarTicketVenta  
+1.	La función  recibe tres parámetros
+mticket: una matriz que contiene los detalles de los productos vendidos.
+idticket: un string que representa el identificador del ticket.
+fecha: un string que representa la fecha de la transacción.
+2.	Declaración de variables
+salida: tipo cadena y la inicializamos con “”
+subtotal: tipo cadena y la inicializamos asignándole el valor de SubTotalTicket(mticket) y   dándole un formato de número decimal con dos 
+iva: tipo cadena y la inicializamos asignándole el valor de IvaTicket(mticket) y   dándole un formato de número decimal con dos 
+total: tipo cadena y la inicializamos asignándole el valor de TotalTicket(mticket) y   dándole un formato de número decimal con dos 
+3.	Construcción del Contenido del Ticket:
+Se concatena en la variable salida 
+la cadena "Fecha ", el valor de fecha, y "Ticket No.", seguido del valor de idticket.
+Se concatena en salida 
+añade una nueva línea y el resultado de la función MostrarTicket(mticket) a salida, que contiene la información de los productos en el ticket.
+Se concatena 
+Se añaden dos nuevas líneas y se concatenan las cadenas que describen el subtotal, el IVA y el total a salida
+4.	Retorno de Valor.
+Variable salida
+
+
+Algoritmo MostrarListaProductosVenta 
+1.	La función   recibe un parámetro
+ Se recibe la matriz de productos productos
+2.	Declaracion Variables
+salida :  tipo cadena que almacenará el resultado final, comenzando como una cadena vacía 
+vproducto: un arreglo de tipo cadena con 3 posiciones para almacenar temporalmente los detalles de cada producto (como nombre, precio y cantidad).
+cadena : tipo cadena vacia
+existencia : tipo entero para guardar el numero de existencia del producto
+3.	Recorremos la matriz producto
+existencia le asignamos el valor de vproductos[ciclo][3]) el cual representa la cantidad de productos
+Evaluamos  existe > 0 para determinar si tiene productos para vender  
+Si el producto está disponible
+se asignan sus detalles a las posiciones del arreglo vproducto:
+vproducto[0]: Nombre del producto , vproducto[1]: Precio del producto, vproducto[2]: Cantidad del producto.
+Se llama a una función (getMostrarProducto) que formatea los datos del producto y devuelve una cadena representativa. 
+Se concatena el valor de salida con cadena se agrega a salida con un salto de línea
+4.	Retorno de Valor
+Variable salida 
+                                                                                                                                                                        
+1.	El procedimiento recibe cuatro parámetros
+mticket: una matriz que representa el ticket de venta.
+mproductos: una matriz que contiene la información de los productos.
+idticket: un string que identifica el ticket de venta.
+tam: un entero que representa el tamaño máximo del ticket.
+2.	Declaracion e Inicialización de Variables:
+info : Tipo de cadena se inicializa llamando a MostrarListaProductosVenta(mproductos), que genera una cadena con la lista de productos disponibles para la venta.
+Código:tipo cadena para almacenar el código del producto
+3.	Lectura del Código del Producto:
+Se llama a la función Leer (info + "\nIntroduce el codigo del producto") para solicitar al usuario que introduzca el código del producto, que se almacena en codigo.
+4.	Se verifica si codigo no es nulo
+Verificación del Producto:
+Se llama a ExisteProducto(codigo.trim(), mproductos) para comprobar si el código del producto existe en la matriz mproductos. El resultado se almacena en posp.
+Se evalua si existe el producto
+Se verifica si posp es mayor a -1, lo que indica que el producto existe.
+Comprobación de Existencia:
+Se verifica si la cantidad del producto en mproductos[posp][3] es mayor a 0.
+Si el producto está disponible:
+Se clona la fila del producto correspondiente y se almacena en producto.
+Se muestra la información del producto utilizando MostrarProducto(producto).
+Se actualiza la cantidad de productos de la matriz productos
+Se crea un nuevo array venta de tamaño 4 y se asignan los valores del producto (código, nombre y precio) y se establece la cantidad en "1".
+Inserción en el Ticket:
+Se llama a InsertarProductoTicket(mticket, venta, posticket, tam) para intentar agregar el producto al ticket.
+Si la función devuelve false, se muestra un mensaje indicando que el arreglo está lleno.
+5.	Manejo de Errores:
+•	Si no hay productos disponibles, se muestra un mensaje indicando que no hay productos para la venta.
+•	Si posp es -1, se muestra un mensaje indicando que el código no existe y no se puede agregar.
+•	Si codigo es nulo, se muestra un mensaje indicando que se recibió un dato nulo.
+
+
+Algoritmo RemoverProductoTicket 
+1.	La función  recibe dos parámetro
+mticket: una matriz que representa el ticket de venta.
+pos: un entero que indica la posición del producto a eliminar.
+2.	Inicialización de Variables:
+Se declara una variable tam y se inicializa con el valor retornado por ObtenerUltimaPosicion(mticket) para obtener la última posición válida del ticket.
+3.	Verificación de la Posición:
+Se verifica si tam es mayor que pos. Si esta condición se cumple, el algoritmo procede a eliminar la fila; de lo contrario, solo marca el elemento en la posición pos como null.
+4.	Desplazamiento de Filas:
+Si la posición es válida, se inicia un bucle for que recorre desde pos hasta tam + 1. 
+En este bucle cada fila se desplaza hacia arriba asignando el contenido de la siguiente fila a la fila actual (mticket[i] = mticket[i + 1]), efectivamente eliminando el producto del ticket.
+5.	Limpieza de la Última Fila:
+Después de desplazar las filas, se marca la última fila (mticket[tam][0]) como null para indicar que ha sido eliminada.
+6.	Manejo de Posición No Válida:
+Si la posición no es válida (es decir, tam no es mayor que pos), el algoritmo simplemente marca el elemento en pos como null
+
+
+Algoritmo EliminarProductoTicket  
+1.	La función  recibe dos parámetro
+mticket: Una matriz de cadenas que contiene los datos del ticket.
+pos: Un entero que representa la posición del producto en el ticket que se desea eliminar o remover
+2.	Se obtiene la cantidad del producto en la posición especificada (pos) del ticket (mticket)
+3.	Se verifica si la cantidad del producto es mayor que 1.
+Si es mayor que 1, se reduce la cantidad en 1.
+Se decrementa la cantidad del producto en 1.
+cantidad - 1 calcula la nueva cantidad.
+El valor resultante se asigna de nuevo a mticket
+Si la cantidad del producto no es mayor que 1 (es decir, es 1 o menos), se procede a remover el producto del ticket.
+4.	Se realiza una llamada al método RemoverProductoTicket 
+pasando la matriz mticket y la posición pos para eliminar completamente el producto del ticket.
+                                                                                                                          
+Algoritmo Eliminar  
+1.	El procedimiento recibe dos parámetros
+mticket: La matriz que contiene los datos del ticket.
+mproductos: La matriz que contiene los datos de los productos
+2.	Declaración de Variables
+Código : tipo cadena 
+3.	Se obtiene la información del ticket llamando a la función MostrarTicket(mticket), y se almacena en la variable info.
+Con el mensaje “Introduce el codigo del producto” a través de la función Leer() y se almacena el valor ingresado en la variable código
+4.	Se verifica si codigo es distinto de null:
+Si codigo es null, se muestra el mensaje “dato nulo”.
+Si codigo contiene un valor, se continúa el proceso.
+5.	Se llama a la función ExisteTicketCodigo(mticket, codigo) para determinar la posición del producto dentro del ticket.
+Si la posición es mayor que -1 (es decir, el producto existe en el ticket), se procede al siguiente paso.
+Se localiza la posición del producto en la matriz de productos mediante la función ExisteProducto(codigo, mproductos) y se almacena en posproducto.
+Se actualiza la cantidad del producto en la matriz de productos:
+Se obtiene el valor actual de la cantidad (ubicado en mproductos[pos][3]), se convierte a entero, se incrementa en 1 y luego se convierte de nuevo a cadena.
+Este nuevo valor se asigna a mproductos[posproducto][3].
+6.	Finalmente, se elimina el producto del ticket llamando al método EliminarProductoTicket(mticket, pos).
+
+
+Algoritmo AgregarProductoAventa 
+1.	El procedimiento recibe tres parámetros
+mticket: una matriz que contiene los datos de los productos del ticket.
+mventa: una matriz que contiene los datos de las ventas.
+idticket: el identificador del ticket que se desea agregar a la venta.
+1.	Declaracion de Variables e Inicializacion
+posventas : entero,  almacena la última posición ocupada en la matriz mventa utilizando la función ObtenerUltimaPosicion.
+posticket : entero almacena la última posición ocupada en la matriz mticket utilizando la función ObtenerUltimaPosicion.
+2.	Recorremos la Matriz mticket
+3.	Se verifica si el primer elemento de la fila actual en mticket no es null . 
+Si la fila no está vacía:
+Se incrementa posventas en 1 para apuntar a la siguiente posición disponible en mventa.
+Se copian los valores de la fila actual de mticket a mventa en la posición posventas, asignando:
+idticket al primer elemento de la fila en mventa.
+El código del producto (mticket[i][0]) al segundo elemento de la fila en mventa.
+El nombre del producto (mticket[i][1]) al tercer elemento de la fila en mventa.
+El precio del producto (mticket[i][2]) al cuarto elemento de la fila en mventa.
+La cantidad del producto (mticket[i][3]) al quinto elemento de la fila en mventa.
+
+
+Algoritmo Pagar 
+1.	El procedimiento recibe cuatro parámetros
+idticket: el identificador del ticket que se desea procesar.
+mventa: una matriz que contiene los datos de las ventas.
+tamVenta: el tamaño de filas de la matriz mventa.
+mticket: una matriz que contiene los datos de los productos del ticket.
+tamTicket: el tamaño de filas de la matriz mticket.
+2.	Declaración de  variables e Inicialización
+posventas: entero almacenas la última posición ocupada en la matriz mventa utilizando la función ObtenerUltimaPosicion.
+post : entera almacena la última posición ocupada en la matriz mticket utilizando la función ObtenerUltimaPosicion.
+3.	Se verifica si la suma de posventas y post es menor que 100:
+Si la condición se cumple, 
+Se llama al método AgregarProductoAVenta para agregar los productos del ticket a la matriz de ventas.
+Si la condición no se cumple
+Se muestra un mensaje indicando "Desbordamiento de Memoria de ventas".
+
+
+Algoritmo DevolucionTicket 
+1.	El procedimiento recibe cuatro parámetros
+mticket: Una matriz que contiene los datos de los productos del ticket que se desea devolver.
+mproductos: Una matriz que contiene los datos de los productos del inventario, incluyendo sus cantidades en stock. 
+2.	Declaración de  variables e Inicialización
+posmticket:Entero que almacena la última posición ocupada en la matriz mticket, obtenida mediante la función ObtenerUltimaPosicion(mticket).
+pos: Entero que se usa como contador para iterar sobre los productos del ticket.
+codigo: Cadena que almacena el código del producto actual del ticket.
+posp: Entero que almacena la posición del producto en la matriz de inventario (mproductos), si es que existe. Se obtiene utilizando la función ExisteProducto.
+cant: Entero que almacena la nueva cantidad del producto, sumando la cantidad del ticket y la cantidad actual en el inventario.
+3.	Recorremos la matriz mticket
+Se obtiene el código del producto actual (mticket[pos][0]) y se guarda en la variable codigo.
+Se busca el código en matriz (mproductos)  y el resultado se guarda en posp.
+Se verifica si se encontró el código , evaluamos el valor de posp es mayor que  -1
+Si es > -1 se  cumple la condición:
+Se calcula la nueva cantidad (cant) sumando la cantidad del producto en el ticket (mticket[pos][3]) con la cantidad actual en el inventario (mproductos[posp][3]).
+La cantidad calculada (cant) se asigna a la posición correspondiente en la matriz de inventario (mproductos[posp][3]), actualizando así el stock del producto.
+Si no se cumple la condición (el producto no existe en el inventario), no se realiza ninguna acción.
+
+
+Algoritmo ObtenerUltimoValorVentas 
+1.	La función  recibe un parámetro
+ Se recibe una matriz de String llamado ventas, que contiene los datos de la venta
+2.	Declaracion e Incializacion de Variables
+ultimoValor : cadena y se inicializara con “000”
+Ultimaposicion : entera y asignaremos la ultima posición fila de ventas usando ObtenerUltimaPosicion(ventas)
+3.	Evaluamos si no esta vacio Ventas posición si > = 0 
+Si no esta vacio
+Asignamos el idticket de Ventas la ultima fila 
+ultimoValor = ventas[ultimaposicion][0]; 
+4.	Retorno del Valor
+variable ultimoValor.
+
+
+Algoritmo MostrarVenta 
+1.	La función  recibe un parámetro
+ Se recibe un arreglo de String llamado venta, que contiene los datos de la venta del producto
+(ID del ticket, código del producto, nombre del producto, precio y cantidad).
+2.	Declaración de Variables y inicialización 
+Idticket : cadena , la inicializaremos  con el resultado de llamar a la  RellenarEspacios y la cual le pasamos el idticket que es representado por elemento del arreglo ventas[0] y  el numero de caracteres de la cadena 6
+codigo : cadena , la inicializaremos  con el resultado de llamar a la  RellenarEspacios y la cual le pasamos el código del producto que es representado por el  elemento del arreglo ventas[1] y el numero de caracteres de la cadena 5
+producto : cadena , la inicializaremos  con el resultado de llamar a la  RellenarEspacios y la cual le pasamos el nombre del producto que es representado por el  elemento del arreglo ventas[2] y  el numero de caracteres de la cadena es 30
+precio : cadena , la inicializaremos  con el resultado de llamar a la  RellenarEspacios y la cual le pasamos el precio de venta del producto que es representado por el  elemento del arreglo ventas[3] y  el numero de caracteres de la cadena es10
+cantidad : cadena , la inicializaremos  con el resultado de llamar a la  RellenarEspacios y la cual le pasamos la cantidad vendida del producto que es representado por el  elemento del arreglo ventas[4] y  el numero de caracteres de la cadena es 10
+5.	Retorno de Valor
+variable cadena ( concatenación)  = (idticket + codigo + producto + precio + cantidad)
+
+
+Algoritmo MostrarListaVentas 
+1.	La función   recibe un parámetro
+ Se recibe la matriz de String llamado ventas, que contiene los datos de las ventas
+2.	Declaración e inicialización de variables
+posventas : entero y asignamos el resultado de ObtenerUltimaPosicion ( ventas );
+salida : cadena y le asignamos "" , Esta variable almacenará el resultado final, que es la lista de ventas en un formato legible.
+cadena: Una variable de tipo String que almacena el resultado de la función MostrarVenta
+3.	Recorrido de la Matriz Ventas:
+venta: crearemos un arreglo unidimensional de tipo String  que almacenara los datos de una venta individual de la matriz ventas.
+cadena almacena el resultado de llamar a la  función MostrarVenta(venta), esta nos regresa una cadena ya formateada para mostrar.
+Concatenamos en salida se concatena el valor de salida con el valor de cadena, junto con un salto de línea ("\n").
+4.	Retorno de Valor
+Se devuelve el valor de la variable  salid, que representa la información de la matriz ventas en un formato claro , legible y tabulado.
+
+
+Reestructuración del procedimiento MenuPuntoVenta 
+1.	Adecuación de los Parámetros
+Los parámetros se adecuarán en este proceso para mejorar la funcionalidad del sistema de punto de venta. 
+Agregaremos como parámetros ventas y productos
+ventas:   representara los productos vendidos
+productos :representa el inventario 
+2.	Declaración de  variables e Inicialización
+tamticket : Entero y le asignaremos el valor de 50
+Vticket : Matriz de cadena [tamticket][4] 
+La inicialización del ticket y la matriz de ventas nos ayudara a gestionar los detalles de cada transacción. 
+Se define una matriz Vticket con un tamaño de 50 filas y 4 columnas, donde cada fila representa un artículo en el ticket y cada columna almacena información específica del artículo, como el código, nombre, descripción y cantidad. 
+Esta matriz permite organizar y manipular los datos del ticket de manera estructurada y eficiente, facilitando la adición, eliminación y listado de artículos durante el proceso de venta
+3.	Mostrar el Ticket
+Esto se logra llamando a la función MostrarTicket, que recibe la matriz Vticket y su tamaño tamticket, y devuelve una cadena de texto con los detalles del ticket. Luego
+Se verifica si esa cadena de texto (Tickettexto) no está vacía. 
+Si no lo está, se añade un salto de línea, el contenido del ticket y otro salto de línea al membrete para que se actualice con la información del ticket, proporcionando una vista completa y actualizada.
+4.	Actualización de las Opciones del Menu
+Opcion 1 : 
+Agregar Artículo al Ticket: se agregara la Llamada a función CapturaVentaProducto para agregar un artículo al ticket y actualizar el inventario.
+Opción 2:
+Eliminar Artículo del Ticket: Modificar la opción 2 : Llama a la función Eliminar para eliminar un artículo del ticket y actualizar el inventario.
+Opción 3:
+Listado de Artículos del Ticket:  Modificar el caso 3 Verifica si el ticket tiene artículos y luego muestra el contenido del ticket.
+Opcion 4 :
+Pagar Ticket:  Muestra el ticket de venta, llama a la función Pagar para registrar el pago y fuerza la salida del menú.
+Opcion 5:
+Salida sin Pagar: Mostrara un mensaje indicando que el ticket no fue pagado, llama a la función DevolucionTicket para devolver los productos al inventario antes de eliminar el ticket.
+
+
+Algoritmo de Reestructuración del procedimiento MenuPrincipal
+1.	Adecuación de los Parámetros
+Los parámetros se adecuarán en este proceso para mejorar la funcionalidad del sistema de punto de venta. 
+Agregaremos como parámetros ventas 
+ventas:   representara los productos vendidos
+2.	Obtención del  valor del último idticket de ventas o si está vacío ventas 
+3.	Modificación de la Gestión del Menú
+La llamada a MenuPuntoVenta ahora le enviaremos la matriz de ventas (vventas), el idticket actualizado, como la matriz de productos (vproductos).  Esto es crucial, ya que el submenú de punto de venta necesita los datos de productos para procesar la venta y los datos de ventas para registrarla
+Se ha añadido a la opción "4.-Ventas". Cuando el usuario selecciona esta opción, se llama a la función MostrarListaVentas(vventas) para imprimir en la consola la lista de todas las ventas registradas en la matriz vventas.
+
+
+Algoritmo de reestructuración del procedimiento principal 
+1.	Cargar Ventas
+2.	Cargaremos una estructura ventas vacías en la variable ventas mediante la llamada a la función CrearVenta().
+3.	Adecuaremos el procedimiento MenuPrincipal con un parámetro más para enviar la estructura ventas 
+
+
+
+
+
