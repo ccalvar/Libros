@@ -1,4 +1,4 @@
-"Un Enfoque PBL de Pensamiento Crítico y de Diseño aplicado a C++, Java, C#, JavaScript y Python". 
+"Pensamiento Computacional en Práctica: La Lógica Universal del Código a C++, Java, C#, JavaScript y Python". 
 El objetivo principal es enseñar a programar a través de la construcción de un sistema de Punto de Venta (POS) funcional en modo consola.
 
 
