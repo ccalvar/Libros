@@ -1,0 +1,76 @@
+
+
+Algoritmo: DescontarStock (Función)
+
+Propósito: Descuenta una cantidad del stock de un producto y retorna un código de estado.
+Parámetros de entrada: vproductos (Matriz de Texto), codigo (Texto), cantidad (Entero)
+Valor de retorno: Entero (1: éxito, 0: sin stock, -1: stock insuficiente, -2: no existe)
+
+Inicializar accion (Entero) en -2
+Buscar producto: Llamar a ExisteProducto con codigo para obtener posicion
+Verificar existencia: Si posicion es -1
+Asignar -2 a accion
+Sino (si el producto existe):
+Obtener stockActual (Entero) de la matriz en posicion
+Verificar stock cero: Si stockActual es 0
+Asignar 0 a accion
+Sino (si hay stock):
+Verificar stock suficiente: Si cantidad es mayor que stockActual
+Asignar -1 a accion
+Sino (si hay suficiente stock):
+Calcular nuevoStock restando cantidad a stockActual
+Actualizar el stock en la matriz vproductos con nuevoStock
+Asignar 1 a accion
+Retornar accion
+
+Algoritmo: AgregarStock (Procedimiento)
+
+Propósito: Permite al usuario agregar una cantidad al stock de un producto existente.
+Parámetro de entrada: vproductos (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Mostrar lista: Llamar a MostrarLista con vproductos
+Solicitar código: Llamar a Leer para obtener el codigo (Texto) del producto
+Verificar código: Si codigo es válido (no nulo)
+Buscar producto: Llamar a ExisteProducto para obtener la posicion (Entero)
+Verificar existencia: Si posicion es mayor que -1
+Solicitar cantidad: Llamar a Leer para obtener la cantidad (Texto) a agregar
+Verificar cantidad: Si cantidad es válida (no nulo)
+Calcular nuevacantidad sumando el stock actual y la nueva cantidad
+Actualizar el stock en la matriz vproductos
+Sino: Mostrar mensaje de error de dato nulo
+Sino: Mostrar mensaje de que el código no existe
+Sino: Mostrar mensaje de error de dato nulo
+
+Algoritmo: MenuInventario (Procedimiento)
+
+Propósito: Define y muestra el menú para la gestión de inventario.
+Parámetro de entrada: vproductos (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Definir opciones: Crear datosmenuinventario (Arreglo de Texto)
+Definir acciones: Crear acciones (Arreglo de Tareas)
+La acción "Listado" debe llamar a MostrarLista con vproductos
+La acción "Agregar" debe llamar a AgregarStock con vproductos
+Llamar a GestionarMenus con el título, opciones, acciones y salir en falso
+
+Algoritmo: MenuPrincipal (Procedimiento)
+
+Propósito: Muestra el menú principal y coordina la navegación a los submenús.
+Parámetro de entrada: vproductos (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Definir opciones: Crear datosmenuprincipal (Arreglo de Texto)
+Definir acciones: Crear acciones (Arreglo de Tareas)
+La acción "Productos" debe llamar a MenuProductos con vproductos
+La acción "Inventario" debe llamar a MenuInventario con vproductos
+Las otras acciones deben llamar a sus respectivos menús
+Llamar a GestionarMenus con el título, opciones, acciones y salir en falso
+
+Algoritmo: main (Procedimiento)
+
+Propósito: Es el punto de inicio que arranca la aplicación.
+Parámetros de entrada: args (Arreglo de Texto)
+Valor de retorno: Ninguno
+Cargar datos: Llamar a CargarProductos y guardar el resultado en productos
+Iniciar menú: Llamar a MenuPrincipal con productos
