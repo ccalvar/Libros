@@ -1,0 +1,142 @@
+Para qué sirve CargarProductos
+Esta función actúa como una base de datos inicial. Su único propósito es crear y rellenar la matriz con una lista fija de 20 productos, incluyendo su código, nombre, precio, existencias e IVA. Esto permite que el programa tenga datos con los que trabajar desde el momento en que se inicia.
+
+Algoritmo: CargarProductos
+1.  Propósito:
+    Crear y devolver una matriz 2D de Strings con datos de productos predefinidos.
+2.  Parámetros Recibidos:
+    * Ninguno.
+3.  Declaración de Variables:
+    * `String[][] producto`: Una matriz bidimensional local que se inicializa directamente con los datos de 20 productos.
+4.  Lógica de Ejecución:
+    1.  Se declara la matriz `producto`.
+    2.  Se asignan 20 filas de datos de productos directamente en el código. Cada fila contiene 5 columnas: Código, Nombre, Precio, Existencias e IVA.
+    3.  La función devuelve la matriz `producto` ya cargada con toda la información.
+
+Para qué sirve MostrarProducto
+Esta función es una herramienta de formato. Toma los datos de un único producto (un arreglo de strings) y los convierte en una sola línea de texto con un espaciado y alineación fijos. Esto es útil para mostrar productos de forma ordenada en una tabla o lista.
+Algoritmo: MostrarProducto
+1.  Propósito:
+    Formatear los datos de un solo producto en una cadena de texto alineada.
+2.  Parámetros Recibidos:
+    * `String[] vproducto`: Un arreglo que contiene los 5 datos de un producto (código, nombre, precio, etc.).
+3.  Declaración de Variables:
+    * `String codigo`, `producto`, `precio`, `cantidad`, `iva`: Almacenan cada dato del producto después de ser formateado.
+    * `String cadena`: Almacenará la línea de texto final.
+4.  Lógica de Ejecución:
+    1.  Para cada elemento del arreglo `vproducto` (del índice 0 al 4), se llama a la función `RellenarEspacios` para asignarle un tamaño fijo.
+    2.  Se concatenan todas las cadenas formateadas (`codigo`, `producto`, `precio`, etc.) en una sola variable `cadena`.
+    3.  Se devuelve la `cadena` resultante.
+
+Para qué sirve MostrarLista
+Esta función se encarga de mostrar en la consola la lista completa de todos los productos de una manera legible y organizada. Utiliza la función `MostrarProducto` para formatear cada fila y presenta todo como una tabla con encabezados.
+Algoritmo: MostrarLista
+1.  Propósito:
+    Generar y devolver una cadena de texto que representa una tabla formateada de todos los productos.
+2.  Parámetros Recibidos:
+    * `String[][] vproductos`: La matriz completa que contiene todos los productos.
+3.  Declaración de Variables:
+    * `String salida`: Almacenará la cadena final con la lista completa.
+    * `String titulo`: Almacenará la cadena del encabezado de la tabla.
+4.  Lógica de Ejecución:
+    1.  Se construye la cadena `titulo` usando `RellenarEspacios` para formatear los encabezados ("Cod", "Nombre", etc.).
+    2.  Se imprime el `titulo` en la consola.
+    3.  Se imprime una línea separadora (`---`) en la consola para la estética.
+    4.  Se inicia un bucle `for` que recorre cada fila de la matriz `vproductos`.
+    5.  Dentro del bucle, para cada fila, se extraen los datos del producto actual.
+    6.  Se llama a la función `MostrarProducto` para formatear esa fila en una sola cadena de texto.
+    7.  Esa cadena formateada se añade a la variable `salida`, seguida de un salto de línea.
+    8.  Una vez que el bucle termina, se devuelve la variable `salida` con la tabla completa.
+
+ExisteProducto
+Esta es una función de búsqueda. Su trabajo es recorrer la lista de productos y verificar si un producto con un `código` específico existe. Si lo encuentra, devuelve su posición (el número de fila); si no, devuelve -1.
+Algoritmo: ExisteProducto
+1.  Propósito:
+    Buscar un producto por su código y devolver su posición (índice) en la matriz.
+2.  Parámetros Recibidos:
+    * `String codigo`: El código del producto que se desea encontrar.
+    * `String[][] vproductos`: La matriz donde se realizará la búsqueda.
+3.  Declaración de Variables:
+    * `int enc`: Almacenará la posición del producto si se encuentra. Se inicializa en -1.
+    * `int pos`: Un contador para llevar la cuenta de la posición actual.
+    * `int ciclo`: Variable de control para el bucle.
+4.  Lógica de Ejecución:
+    1.  Se inicializa `enc` en -1 (valor que indica "no encontrado").
+    2.  Se inicia un bucle `for` que recorre cada fila de la matriz `vproductos`.
+    3.  En cada iteración, se compara el código de la fila actual (`vproductos[ciclo][0]`) con el `codigo` buscado.
+    4.  Si los códigos coinciden, se asigna el valor de la posición actual a `enc` y se termina el bucle inmediatamente con `break`.
+    5.  Si no coinciden, se incrementa el contador `pos`.
+
+
+Para qué sirve ModificarProducto
+Este procedimiento maneja la interacción con el usuario para cambiar el precio de un producto. Muestra la lista, pide un código, verifica que exista y luego pide el nuevo precio para actualizarlo en la matriz.
+Algoritmo: ModificarProducto
+1.  Propósito:
+    Permitir al usuario modificar el precio de un producto existente.
+2.  Parámetros Recibidos:
+    * `String[][] vproductos`: La matriz de productos que se va a modificar.
+3.  Declaración de Variables:
+    * `String codigo`, `precio`: Almacenan la entrada del usuario.
+    * `int posicion`: Almacena la ubicación del producto en la matriz.
+4.  Lógica de Ejecución:
+    1.  Se llama a `MostrarLista` para que el usuario vea los productos y sus códigos.
+    2.  Se pide al usuario que introduzca el `codigo` del producto a modificar usando la función `Leer`.
+    3.  Se verifica si el `codigo` no es nulo o vacío.
+    4.  Si es válido, se llama a `ExisteProducto` para obtener su `posicion`.
+    5.  Si `posicion` es mayor que -1 (el producto existe):
+        * Se le pide al usuario que introduzca el nuevo `precio`.
+        * Se verifica que el `precio` no sea nulo o vacío.
+        * Si es válido, se actualiza el precio en la matriz: `vproductos[posicion][2] = precio`.
+        * Se muestra un mensaje de éxito.
+        * Si el precio no es válido, se muestra un mensaje de error.
+    6.  Si `posicion` es -1, se muestra un mensaje de que el producto no existe.
+    7.  Si el `codigo` inicial no fue válido, se muestra un mensaje de error.
+
+---
+Para qué sirve MenuProductos
+Este procedimiento define y lanza el menú específico para la gestión de productos. Está preparado para pasar la matriz de productos a las funciones que lo necesiten, como `ModificarProducto`.
+
+Algoritmo: MenuProductos
+
+1.  Propósito:
+    Definir y mostrar el menú de opciones para la gestión de productos.
+2.  Parámetros Recibidos:
+    * `String[][] productos`: La matriz principal de productos.
+3.  Declaración de Variables:
+    * `String[] datosmenuproductos`: Arreglo con los textos de las opciones.
+    * `Runnable[] acciones`: Arreglo con las acciones para cada opción.
+4.  Lógica de Ejecución:
+    1.  Se definen las opciones del menú ("Modificar", "Listado", "Salida").
+    2.  Se definen las acciones:
+        * La acción para "Modificar" es una llamada a `ModificarProducto(productos)`.
+        * La acción para "Listado" es una llamada a `MostrarLista(productos)`.
+    3.  Se llama al motor `GestionarMenus` para que muestre y controle este menú.
+
+
+Para qué sirve MenuPrincipal
+Este es el centro de navegación de la aplicación. Es el primer menú que ve el usuario y le permite acceder a las diferentes secciones (Productos, Punto de Venta, etc.). Su responsabilidad principal es iniciar los submenús y pasarles los datos necesarios, como la lista de productos.
+
+Algoritmo: MenuPrincipal
+1.  Propósito:
+    Mostrar el menú principal y coordinar la navegación a los submenús.
+2.  Parámetros Recibidos:
+    * `String[][] productos`: La matriz principal de productos.
+3.  Declaración de Variables:
+    * `String[] datosmenuprincipal`: Arreglo con los textos de las opciones principales.
+    * `Runnable[] acciones`: Arreglo con las acciones para cada opción.
+4.  Lógica de Ejecución:
+    1.  Se definen las opciones del menú principal.
+    2.  Se definen las acciones, donde cada acción es una llamada a un procedimiento de submenú:
+        * La acción para "Productos" llama a `MenuProductos(productos)`.
+        * Las otras acciones llaman a sus respectivos menús.
+    3.  Se llama al motor `GestionarMenus` para ejecutar el menú principal.
+
+---
+Para qué sirve main
+Este es el punto de arranque de todo el programa. Su única tarea es inicializar los datos cargando los productos y luego iniciar la interfaz de usuario llamando al menú principal.
+Algoritmo: main
+1.  Propósito:
+    Iniciar la aplicación.
+2.  Lógica de Ejecución:
+    1.  Se llama a la función `CargarProductos()` y su resultado se guarda en la variable estática `productos`.
+    2.  Se llama al procedimiento `MenuPrincipal(productos)`, pasándole los datos recién cargados para que el resto del programa pueda utilizarlos.
