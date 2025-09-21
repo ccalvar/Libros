@@ -1,0 +1,98 @@
+GestionarMenus`
+Este procedimiento es el proceso generico que controla la lógica de todos los menús. Su función es mostrar las opciones, leer la entrada del usuario, manejar errores y ejecutar la acción correcta, evitando tener que reescribir este código para cada menú.
+
+### **Algoritmo: `GestionarMenus`**
+1.  **Propósito:**
+    Este procedimiento es un motor genérico y reutilizable para controlar la lógica de cualquier menú de consola.
+2.  **Parámetros Recibidos:**
+    * `String titulo`: Contiene el texto que se mostrará como encabezado del menú.
+    * `String[] opciones`: Es un arreglo con los textos de cada opción que el usuario podrá elegir.
+    * `Runnable[] acciones`: Es un arreglo de tareas o bloques de código. Cada acción corresponde a una opción del menú.
+    * `boolean salir`: Es un interruptor que, si es `true`, activa una condición de salida especial para la penúltima opción.
+3.  **Declaración de Variables:**
+    * `String opcion`: Almacenará la entrada del usuario como texto.
+    * `int opcionSalida`: Almacenará el número correspondiente a la última opción, que siempre es la salida estándar.
+    * `int opcionsalida2`: Almacenará el número de la penúltima opción, usado para la salida especial.
+4.  **Lógica de Ejecución (Bucle de Menú):**
+    1.  Se inicia un bucle `do-while` que se ejecutará de forma continua hasta que se encuentre una instrucción para terminar (`break`).
+    2.  Dentro del bucle, se llama al procedimiento `DesplegarMenu` para mostrar el título y las opciones, y se captura la respuesta del usuario en la variable `opcion`.
+    3.  **Validación de Entrada**: Se verifica si la `opcion` recibida es nula o si no es un número entero. Si la entrada es inválida, se muestra un mensaje de error y el bucle vuelve a empezar.
+    4.  **Condición de Salida Estándar**: Se comprueba si la `opcion` del usuario es igual a `opcionSalida` (la última opción).
+        * Si es así, se ejecuta la acción correspondiente a esa última opción.
+        * Se termina el bucle.
+    5.  **Procesamiento de Opciones**: Si no es una opción de salida, se intenta lo siguiente:
+        * Se convierte la `opcion` a un número entero y se le resta 1 para obtener el `indice` del arreglo.
+        * Se valida que el `indice` esté dentro de los límites del arreglo `acciones`.
+        * Si es válido, se ejecuta la acción principal: `acciones[indice].run()`.
+        * **Condición de Salida Especial**: Inmediatamente después, se verifica si el parámetro `salir` es `true` Y si la `opcion` del usuario fue la penúltima (`opcionsalida2`). Si ambas condiciones se cumplen, también se termina el bucle.
+        * Si el `indice` no es válido, se muestra un mensaje de "No existe esta opción".
+    6.  **Manejo de Errores**: Se utiliza un bloque `try-catch` para capturar cualquier error si la conversión a número falla, mostrando un mensaje de error.
+
+
+MenuProductos`
+Este procedimiento se encarga exclusivamente de **definir y mostrar el menú de gestión de productos**, con sus opciones específicas como "Modificar" y "Listado".
+Algoritmo: `MenuProductos`**
+1.  **Propósito:**
+    Este procedimiento define y lanza el menú específico para la gestión de productos.
+2.  **Declaración de Variables:**
+    * `String[] datosmenuproductos`: Se crea un arreglo de texto que contiene las opciones a mostrar: "Modificar", "Listado" y "Salida".
+    * `Runnable[] acciones`: Se crea un arreglo de acciones que corresponde a cada opción. Las acciones definidas son imprimir mensajes en la consola.
+3.  **Lógica de Ejecución:**
+    1.  Se inicializan los arreglos `datosmenuproductos` y `acciones` con sus respectivos valores.
+    2.  Se llama al procedimiento `GestionarMenus`, pasándole el título "Opciones de Productos", los arreglos de opciones y acciones, y el valor `false` para el parámetro `salir`, ya que no se necesita una salida especial.
+
+### MenuPuntoVenta`
+Este procedimiento **configura y ejecuta el menú del punto de venta**. Su trabajo es generar un nuevo número de ticket, mostrar la fecha y presentar las opciones relevantes para una venta, como "Agregar", "Eliminar" y "Pagar".
+### **Algoritmo: `MenuPuntoVenta`**
+1.  **Propósito:**
+    Este procedimiento configura y gestiona el menú del punto de venta.
+2.  **Parámetros Recibidos:**
+    * `String idticket`: Recibe el número del último ticket generado para poder calcular el siguiente.
+3.  **Declaración de Variables:**
+    * `String membrete`: Almacenará el texto del encabezado del menú, que incluye la fecha y el número de ticket.
+    * `String fechadia`: Almacenará la fecha actual.
+    * `String[] datosmenupuntoventa`: Contendrá los textos de las opciones del menú de venta.
+    * `Runnable[] acciones`: Contendrá las acciones para cada opción.
+4.  **Lógica de Ejecución:**
+    1.  Se llama a la función `IdTicketSiguiente` pasándole el `idticket` recibido para generar el nuevo número de ticket.
+    2.  Se llama a la función `Fecha` para obtener la fecha actual.
+    3.  Se construye el `membrete` concatenando la fecha y el nuevo ID de ticket.
+    4.  Se definen las opciones en el arreglo `datosmenupuntoventa`.
+    5.  Se definen las acciones correspondientes en el arreglo `acciones`.
+    6.  Se llama al procedimiento `GestionarMenus`, pasándole el `membrete` como parte del título, los arreglos de opciones y acciones, y el valor `true` para el parámetro `salir`. Esto permite que la opción "Pagar" (la penúltima) también cierre el menú.
+
+### MenuInventario`
+Este procedimiento se dedica a **definir y mostrar el menú de gestión de inventario**, permitiendo al usuario realizar acciones como listar el stock o agregar nuevas existencias.
+### **Algoritmo: `MenuInventario`**
+1.  **Propósito:**
+    Define y lanza el menú específico para la gestión del inventario.
+2.  **Declaración de Variables:**
+    * `String[] datosmenuinventario`: Se crea un arreglo de texto con las opciones del menú de inventario.
+    * `Runnable[] acciones`: Se crea un arreglo con las acciones correspondientes para cada opción.
+3.  **Lógica de Ejecución:**
+    1.  Se inicializan los arreglos `datosmenuinventario` y `acciones`.
+    2.  Se llama al procedimiento `GestionarMenus`, pasándole el título "Opciones de Inventarios", los datos de los arreglos, y `false` para el parámetro `salir`.
+
+
+MenuPrincipal`
+Este procedimiento es el **centro de navegación de la aplicación**. Muestra el menú de más alto nivel que permite al usuario acceder a las diferentes secciones del sistema, como Productos, Punto de Venta o Inventario.
+### **Algoritmo: `MenuPrincipal`**
+1.  **Propósito:**
+    Actúa como el punto de entrada de la aplicación, mostrando el menú principal desde el cual se puede navegar a los otros submenús.
+2.  **Declaración de Variables:**
+    * `String[] datosmenuprincipal`: Contiene los textos de las opciones del menú principal ("Productos", "Punto de Venta", etc.).
+    * `Runnable[] acciones`: Contiene las acciones para cada opción principal.
+3.  **Lógica de Ejecución:**
+    1.  Se inicializan los arreglos `datosmenuprincipal` y `acciones`.
+    2.  **Definición de Acciones Complejas**: A diferencia de los otros menús, las acciones aquí no son simples impresiones de texto. Cada acción es una llamada a otro procedimiento de menú (ej: `MenuProductos()`, `MenuPuntoVenta("000")`, etc.). Estas llamadas están envueltas en bloques `try-catch` para manejar posibles errores de `IOException`.
+    3.  Se llama al procedimiento `GestionarMenus`, pasándole el título de la tienda, los datos de los arreglos, y `false` para el parámetro `salir`.
+
+main
+Este es el **punto de arranque de todo el programa**. Cuando se ejecuta la aplicación, el método `main` es lo primero que se invoca, y su única responsabilidad es llamar al `MenuPrincipal` para iniciar la interacción con el usuario.
+### **Algoritmo: `main`**
+1.  **Propósito:**
+    Es el punto de inicio de la ejecución de todo el programa.
+2.  **Lógica de Ejecución:**
+    1.  El procedimiento se ejecuta automáticamente cuando se inicia el programa.
+    2.  Llama al procedimiento `MenuPrincipal()` para comenzar la interacción con el usuario.
+    3.  Está preparado para capturar cualquier `IOException` que pueda surgir de las operaciones de lectura en los menús.
