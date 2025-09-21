@@ -1,0 +1,148 @@
+Algoritmo: ObtenerUltimoValorVentas (Función)
+
+Propósito: Obtiene el código del último producto registrado en la matriz de ventas en memoria.
+Parámetro de entrada: ventas (Matriz de Texto)
+Valor de retorno: Texto (el código del último producto o "000")
+
+Obtener ultimaposicion (Entero) llamando a ObtenerUltimaPosicion con ventas
+Inicializar ultimoValor (Texto) en "000"
+Si ultimaposicion es mayor o igual a 0:
+Asignar a ultimoValor el valor de la segunda columna ([1]) en la fila ultimaposicion de ventas
+Retornar ultimoValor
+
+Algoritmo: ExisteArchivo (Función)
+
+Propósito: Verifica si un archivo con un nombre específico existe en el disco.
+Parámetro de entrada: narchivo (Texto)
+Valor de retorno: Booleano (verdadero si existe, falso si no)
+
+Crear un objeto Archivo con narchivo
+Retornar el resultado de la comprobación de existencia del archivo
+
+Algoritmo: GenerarCVSFilaTicket (Función)
+
+Propósito: Formatea los datos de un producto vendido en una sola línea de texto en formato CSV.
+Parámetros de entrada: idticket (Texto), codigo (Texto), producto (Texto), precio (Texto), cantidad (Texto), iva (Texto)
+Valor de retorno: Texto (la fila formateada en CSV)
+
+Calcular el IVA del producto llamando a IvaProducto
+Calcular el total del producto llamando a TotalProducto
+Concatenar todos los parámetros de entrada y los resultados de los cálculos, separados por comas
+Retornar la cadena resultante
+
+Algoritmo: GuardarDatosCsvVentaTicket (Procedimiento)
+
+Propósito: Guarda todos los productos de un ticket en un archivo CSV.
+Parámetros de entrada: matriz (Matriz de Texto), nombrearchivo (Texto), filas (Entero), idticket (Texto)
+Valor de retorno: Ninguno
+
+Inicializar cadena (Texto) como vacía
+Para cada fila desde 0 hasta filas:
+Generar cadenafila (Texto) llamando a GenerarCVSFilaTicket con los datos de la fila actual
+Añadir cadenafila y un salto de línea a cadena
+Escribir en archivo: Llamar a EscribirArchivoCSV con nombrearchivo y cadena
+
+Algoritmo: EscribirArchivoCSV (Procedimiento)
+
+Propósito: Escribe o añade contenido de texto a un archivo.
+Parámetros de entrada: archivo (Texto), contenido (Texto)
+Valor de retorno: Ninguno
+
+Intentar abrir el archivo para escritura (en modo de añadir si ya existe):
+Escribir el contenido en el archivo
+En caso de error:
+Mostrar un mensaje de error
+
+Algoritmo: LeerDatosCSV (Función)
+
+Propósito: Lee un archivo CSV y devuelve el primer dato de la última línea no vacía.
+Parámetro de entrada: nombreArchivo (Texto)
+Valor de retorno: Texto (el primer dato de la última línea, o vacío)
+
+Inicializar primerDato (Texto) como vacío
+Intentar abrir y leer nombreArchivo:
+Mientras haya una linea para leer:
+Limpiar espacios de la linea
+Si la linea no está vacía:
+Dividir la linea por comas en un arreglo de datos
+Actualizar primerDato con el primer elemento de datos
+En caso de error:
+Mostrar un mensaje de error
+Retornar primerDato
+
+Algoritmo: GenerarCSVFilaVenta (Función)
+
+Propósito: Formatea los totales de una venta en una sola línea de texto en formato CSV.
+Parámetros de entrada: fecha (Texto), idticket (Texto), subtotal (Texto), iva (Texto), total (Texto)
+Valor de retorno: Texto (la fila formateada en CSV con un salto de línea)
+
+Concatenar todos los parámetros de entrada, separados por comas
+Añadir un salto de línea al final
+Retornar la cadena resultante
+
+Algoritmo: GuardarDatosCsvVentas (Procedimiento)
+
+Propósito: Guarda una cadena de contenido en un archivo CSV.
+Parámetros de entrada: nombrearchivo (Texto), contenido (Texto)
+Valor de retorno: Ninguno
+
+Llamar a EscribirArchivoCSV con nombrearchivo y contenido
+
+Algoritmo: MenuPuntoVenta (Procedimiento)
+
+Propósito: Configura y gestiona el menú del punto de venta, manejando la creación del ticket, la adición/eliminación de productos y el proceso de pago con guardado en archivos CSV.
+Parámetros de entrada: vventas (Matriz de Texto), vidticket (Texto), vproductos (Matriz de Texto), nombrearch (Texto)
+Valor de retorno: Ninguno
+
+Crear vticket (Matriz de Texto) vacía para la venta actual
+Guardar vidticket en antidtiket como respaldo
+Generar idticket (Texto) nuevo llamando a IdTicketSiguiente con vidticket
+Obtener fechadia (Texto) llamando a Fecha
+Crear titulo (Texto) del menú con la fecha y el nuevo idticket
+Definir opciones: Crear datosmenupuntoventa (Arreglo de Texto)
+Definir acciones: Crear acciones (Arreglo de Tareas)
+La acción "Agregar" debe:
+Llamar a CapturaVentaProducto para añadir un producto
+Llamar a DesplegarTicket para mostrar el estado actual del ticket
+La acción "Eliminar" debe:
+Llamar a Eliminar para quitar un producto
+Llamar a DesplegarTicket para mostrar el estado actual
+La acción "Listado" debe:
+Verificar si el ticket tiene productos llamando a ObtenerUltimaPosicion
+Si tiene, llamar a MostrarTicket
+La acción "Pagar" debe:
+Mostrar un mensaje de procesamiento y el resumen del ticket
+Llamar a Pagar para registrar la venta en la matriz vventas
+Verificar si el ticket tiene productos
+Si tiene, guardar los detalles del ticket en el archivo nombrearch
+Generar una línea de resumen de la venta
+Guardar la línea de resumen en el archivo "ventas.csv"
+La acción "Salida" debe:
+Llamar a DevolucionTicket para devolver los productos al stock
+Mostrar un mensaje de cancelación
+Restaurar idticket al valor original guardado en antidtiket
+Llamar a GestionarMenus con el titulo, opciones, acciones y salir en verdadero
+
+
+
+
+
+
+Algoritmo: MenuPrincipal (Procedimiento)
+
+Propósito: Muestra el menú principal, gestiona la persistencia del ID de ticket y navega a los submenús.
+Parámetros de entrada: vproductos (Matriz de Texto), vventas (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Definir opciones: Crear datosmenuprincipal (Arreglo de Texto)
+Generar nombre de archivo: Llamar a Fecha y añadir ".csv" para crear narchivo (Texto)
+Verificar archivo: Llamar a ExisteArchivo con narchivo
+Si el archivo existe:
+Leer último ticket: Llamar a LeerDatosCSV con narchivo y guardar en idticket
+Verificar idticket: Si idticket es nulo o está vacío:
+Obtener último ticket de ventas: Llamar a ObtenerUltimoValorVentas con vventas y guardar en idticket
+Definir acciones: Crear acciones (Arreglo de Tareas)
+La acción "Punto de Venta" debe llamar a MenuPuntoVenta con vventas, idticket, vproductos y narchivo
+Las otras acciones llaman a sus respectivos menús
+Llamar a GestionarMenus con el título, opciones y acciones
+
