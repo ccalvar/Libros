@@ -1,0 +1,361 @@
+Algoritmo: CrearVenta (Función)
+
+Propósito: Crea una nueva matriz vacía para almacenar los registros de ventas.
+Parámetro de entrada: Ninguno
+Valor de retorno: Matriz de Texto
+
+Retornar una nueva Matriz de Texto con tamventas filas y 6 columnas.
+
+Algoritmo: ObtenerUltimaPosicion (Función)
+
+Propósito: Encuentra el índice de la última fila utilizada en una matriz.
+Parámetro de entrada: matriz (Matriz de Texto)
+Valor de retorno: Entero (el último índice o -1 si está vacía)
+
+Inicializar ultimaPosicion (Entero) en -1
+Para cada fila en la matriz:
+Si el primer elemento de la fila no es nulo o vacío:
+Actualizar ultimaPosicion con el índice de la fila actual
+Retornar ultimaPosicion
+
+Algoritmo: UltimoTicket (Función)
+
+Propósito: Obtiene el ID del último ticket de la matriz de ventas.
+Parámetros de entrada: pos (Entero), mventa (Matriz de Texto)
+Valor de retorno: Texto (el ID del ticket o "000")
+
+Inicializar idticket (Texto) en "000"
+Si pos es mayor que -1:
+Asignar a idticket el valor de la primera columna en la fila pos de mventa
+Retornar idticket
+
+Algoritmo: CrearTicket (Función)
+
+Propósito: Crea una nueva matriz vacía para un ticket individual.
+Parámetro de entrada: Ninguno
+Valor de retorno: Matriz de Texto
+
+Retornar una nueva Matriz de Texto con 20 filas y 5 columnas.
+
+Algoritmo: ExisteTicketCodigo (Función)
+
+Propósito: Busca si un producto ya existe dentro de un ticket.
+Parámetros de entrada: mticket (Matriz de Texto), codigo (Texto)
+Valor de retorno: Entero (la posición del producto o -1)
+
+Inicializar enc (Entero) en -1
+Obtener pos (Entero) llamando a ObtenerUltimaPosicion con mticket
+Para cada fila desde 0 hasta pos:
+Si el código en la fila actual de mticket es igual a codigo:
+Asignar a enc el índice de la fila actual
+Retornar enc inmediatamente
+Retornar enc
+
+Algoritmo: InsertarProductoTicket (Función)
+
+Propósito: Agrega un producto a un ticket, o actualiza su cantidad si ya existe.
+Parámetros de entrada: mticket (Matriz de Texto), datos (Arreglo de Texto), tamticket (Entero)
+Valor de retorno: Booleano (verdadero si tuvo éxito, falso si no)
+
+Inicializar sucedio (Booleano) en verdadero
+Obtener posticket (Entero) llamando a ObtenerUltimaPosicion con mticket
+Buscar si el producto existe: Llamar a ExisteTicketCodigo y guardar en enc
+Verificar espacio: Si posticket es menor que tamticket:
+Verificar existencia: Si enc es mayor que -1 (producto ya existe):
+Obtener cantidadactual de mticket
+Incrementar cantidadactual por 1 y actualizarla en mticket
+Sino (producto no existe):
+Incrementar posticket
+Copiar los datos del producto a la nueva fila en posticket
+Sino (no hay espacio):
+Asignar falso a sucedio
+Retornar sucedio
+
+Algoritmo: IvaProducto (Función)
+
+Propósito: Calcula el monto del IVA para una línea de producto.
+Parámetros de entrada: precio (Texto), iva (Texto), cantidad (Texto)
+Valor de retorno: Texto (el monto del IVA calculado)
+
+Convertir iva, precio y cantidad a números decimales
+Inicializar ivap (Decimal) en 0
+Si el iva es mayor que 0:
+Calcular ivap como (iva/100) * precio * cantidad
+Convertir ivap a Texto y retornarlo
+
+Algoritmo: TotalProducto (Función)
+
+Propósito: Calcula el precio total de una línea de producto (precio * cantidad + IVA).
+Parámetros de entrada: precio (Texto), cantidad (Texto), iva (Texto)
+Valor de retorno: Texto (el total formateado a dos decimales)
+
+Calcular total (Decimal) como precio * cantidad
+Si el iva es diferente de 0:
+Añadir el resultado de IvaProducto al total
+Formatear total a dos decimales y retornarlo como Texto
+
+Algoritmo: MostrarProductoTicket (Función)
+
+Propósito: Formatea los datos de un producto dentro del ticket en una sola línea de texto.
+Parámetros de entrada: mticket (Matriz de Texto), pos (Entero)
+Valor de retorno: Texto con el producto del ticket formateado
+
+Obtener codigo, producto, precio, cantidad de mticket en la posición pos
+Formatear cada dato a un tamaño fijo usando RellenarEspacios
+Calcular iva llamando a IvaProducto y formatearlo
+Calcular totalproducto llamando a TotalProducto y formatearlo
+Concatenar todos los datos formateados en una sola cadena
+Retornar la cadena
+
+Algoritmo: MostrarTicket (Función)
+
+Propósito: Genera una cadena con el detalle de todos los productos en un ticket.
+Parámetro de entrada: mticket (Matriz de Texto)
+Valor de retorno: Texto con el contenido del ticket
+
+Inicializar salida (Texto) como vacía
+Obtener pos (Entero) llamando a ObtenerUltimaPosicion con mticket
+Para cada fila desde 0 hasta pos:
+Añadir el resultado de MostrarProductoTicket para la fila actual a salida
+Retornar salida
+
+Algoritmo: SubTotalTicket (Función)
+
+Propósito: Calcula la suma de los precios de los productos sin IVA.
+Parámetro de entrada: mticket (Matriz de Texto)
+Valor de retorno: Decimal (el subtotal del ticket)
+
+Inicializar subtotal (Decimal) en 0
+Obtener pos (Entero) llamando a ObtenerUltimaPosicion con mticket
+Para cada fila desde 0 hasta pos:
+Obtener precio y cantidad de la fila actual
+Añadir (precio * cantidad) a subtotal
+Retornar subtotal
+
+Algoritmo: IvaTicket (Función)
+
+Propósito: Calcula la suma total del IVA de todos los productos en el ticket.
+Parámetro de entrada: mticket (Matriz de Texto)
+Valor de retorno: Decimal (el IVA total del ticket)
+
+Inicializar ivatotal (Decimal) en 0
+Obtener pos (Entero) llamando a ObtenerUltimaPosicion con mticket
+Para cada fila desde 0 hasta pos:
+Añadir el resultado de IvaProducto para la fila actual a ivatotal
+Retornar ivatotal
+
+Algoritmo: TotalTicket (Función)
+
+Propósito: Calcula el monto total a pagar del ticket (Subtotal + IVA).
+Parámetro de entrada: mticket (Matriz de Texto)
+Valor de retorno: Decimal (el total del ticket)
+
+Obtener total (Decimal) llamando a SubTotalTicket
+Si total es mayor que 0:
+Añadir el resultado de IvaTicket a total
+Retornar total
+
+Algoritmo: MostrarTicketVenta (Función)
+
+Propósito: Genera un recibo de venta completo y formateado.
+Parámetros de entrada: mticket (Matriz de Texto), idticket (Texto), fecha (Texto)
+Valor de retorno: Texto con el recibo completo
+
+Formatear a texto el subtotal llamando a SubTotalTicket
+Formatear a texto el iva llamando a IvaTicket
+Formatear a texto el total llamando a TotalTicket
+Crear encabezado salida (Texto) con fecha y idticket
+Añadir el resultado de MostrarTicket a salida
+Añadir las líneas de subtotal, iva y total a salida
+Retornar salida
+
+Algoritmo: MostrarListaProductosVenta (Función)
+
+Propósito: Genera una lista de productos que tienen stock disponible para la venta.
+Parámetro de entrada: vproductos (Matriz de Texto)
+Valor de retorno: Texto con la lista de productos disponibles
+
+Inicializar salida (Texto) como vacía
+Para cada producto en vproductos:
+Obtener existencia (Entero) del producto
+Si existencia es mayor que 0:
+Añadir el resultado de MostrarProducto para ese producto a salida
+Retornar salida
+
+Algoritmo: CapturaVentaProducto (Procedimiento)
+
+Propósito: Gestiona la adición de un producto al ticket por parte del usuario.
+Parámetros de entrada: mticket (Matriz de Texto), mproductos (Matriz de Texto), idticket (Texto), tamticket (Entero)
+Valor de retorno: Ninguno
+
+Mostrar lista de productos llamando a MostrarLista
+Solicitar codigo (Texto) de producto al usuario llamando a Leer
+Si codigo es válido:
+Buscar posp (Entero) del producto en mproductos llamando a ExisteProducto
+Si posp es mayor que -1 (existe):
+Si el stock en posp es mayor que 0:
+Descontar 1 del stock del producto llamando a DescontarStock
+Crear venta (Arreglo de Texto) con los datos del producto y cantidad 1
+Insertar en ticket llamando a InsertarProductoTicket
+Si la inserción falla, mostrar mensaje de "arreglo lleno"
+Sino (no hay stock): Mostrar mensaje de "no hay productos para venta"
+Sino (no existe): Mostrar mensaje de "el codigo no existe"
+Sino (dato nulo): Mostrar mensaje de "dato nulo"
+
+Algoritmo: RemoverProductoTicket (Procedimiento)
+
+Propósito: Elimina una fila completa de la matriz del ticket.
+Parámetros de entrada: mticket (Matriz de Texto), pos (Entero)
+Valor de retorno: Ninguno
+
+Obtener tam (Entero) llamando a ObtenerUltimaPosicion
+Si tam es mayor que pos:
+Para cada fila desde pos hasta tam:
+Mover el contenido de la fila+1 a la fila actual
+Poner a nulo el primer elemento de la última fila
+Sino (es el último elemento):
+Poner a nulo el primer elemento en la posición pos
+
+Algoritmo: EliminarProductoTicket (Procedimiento)
+
+Propósito: Reduce la cantidad de un producto en el ticket o lo elimina si la cantidad es 1.
+Parámetros de entrada: mticket (Matriz de Texto), pos (Entero)
+Valor de retorno: Ninguno
+
+Obtener cantidad (Entero) del producto en la posición pos
+Si cantidad es mayor que 1:
+Decrementar la cantidad en 1 en la matriz mticket
+Sino (cantidad es 1):
+Llamar a RemoverProductoTicket para eliminar la fila completa
+
+Algoritmo: Eliminar (Procedimiento)
+
+Propósito: Gestiona la eliminación de un producto del ticket por parte del usuario.
+Parámetros de entrada: mticket (Matriz de Texto), mproductos (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Mostrar contenido del ticket llamando a MostrarTicket
+Solicitar codigo (Texto) del producto a eliminar llamando a Leer
+Si codigo es válido:
+Buscar pos (Entero) del producto en mticket
+Si pos es mayor que -1 (existe en ticket):
+Buscar posproducto (Entero) en mproductos
+Incrementar en 1 el stock en mproductos en la posición posproducto
+Llamar a EliminarProductoTicket para quitarlo del ticket
+Sino (dato nulo): Mostrar mensaje de "dato nulo"
+
+Algoritmo: AgregarProductoAVenta (Procedimiento)
+
+Propósito: Copia todos los productos de un ticket finalizado a la matriz de ventas.
+Parámetros de entrada: mticket (Matriz de Texto), mventa (Matriz de Texto), idticket (Texto)
+Valor de retorno: Ninguno
+
+Obtener posventas (Entero) de mventa
+Obtener posticket (Entero) de mticket
+Para cada fila desde 0 hasta posticket:
+Si la fila en mticket no está vacía:
+Incrementar posventas
+Copiar los datos de la fila de mticket a la nueva fila en mventa, añadiendo idticket en la primera columna
+
+Algoritmo: Pagar (Procedimiento)
+
+Propósito: Finaliza una venta, registrando los productos en la bitácora de ventas.
+Parámetros de entrada: idticket (Texto), mventa (Matriz de Texto), mticket (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Obtener posventas (Entero) de mventa
+Obtener post (Entero) de mticket
+Si (posventas + post) es menor que el tamaño máximo de ventas:
+Llamar a AgregarProductoAVenta para registrar la venta
+Sino: Mostrar mensaje de "Desbordamiento de Memoria"
+
+Algoritmo: DevolucionTicket (Procedimiento)
+
+Propósito: Devuelve el stock de un ticket cancelado al inventario principal.
+Parámetros de entrada: mticket (Matriz de Texto), mproductos (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Obtener posmticket (Entero) de mticket
+Para cada fila desde 0 hasta posmticket:
+Obtener codigo de la fila actual
+Buscar posp (Entero) del producto en mproductos
+Si posp es mayor que -1 (existe):
+Sumar la cantidad del ticket al stock en mproductos
+Actualizar el stock en mproductos
+
+Algoritmo: DesplegarTicket (Función)
+
+Propósito: Crea el texto completo de un ticket con su encabezado y contenido.
+Parámetro de entrada: mticket (Matriz de Texto), fechadia (Texto), idticket (Texto)
+Valor de retorno: Texto con el ticket formateado
+
+Crear membrete (Texto) con fechadia y idticket
+Obtener Tickettexto (Texto) llamando a MostrarTicket
+Retornar la concatenación de membrete y Tickettexto
+
+Algoritmo: MenuPuntoVenta (Procedimiento)
+
+Propósito: Configura y muestra el menú del punto de venta.
+Parámetros de entrada: vventas (Matriz de Texto), vidticket (Texto), vproductos (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Crear una vticket (Matriz de Texto) vacía
+Guardar vidticket en antidtiket
+Generar idticket (Texto) nuevo llamando a IdTicketSiguiente con vidticket
+Obtener fechadia (Texto) llamando a Fecha
+Crear titulo (Texto) del menú
+Definir opciones: Crear datosmenupuntoventa (Arreglo de Texto)
+Definir acciones: Crear acciones (Arreglo de Tareas)
+La acción "Agregar" debe llamar a CapturaVentaProducto
+La acción "Eliminar" debe llamar a Eliminar
+La acción "Listado" debe llamar a MostrarTicket
+La acción "Pagar" debe llamar a MostrarTicketVenta y Pagar
+La acción "Salida" debe llamar a DevolucionTicket y restaurar idticket a antidtiket
+Llamar a GestionarMenus con el titulo, opciones, acciones y salir en verdadero
+
+Algoritmo: MostrarVenta (Función)
+
+Propósito: Formatea los datos de un registro de venta en una sola línea de texto.
+Parámetro de entrada: venta (Arreglo de Texto)
+Valor de retorno: Texto con el registro de venta formateado
+
+Para cada elemento en el arreglo venta:
+Formatear el elemento a un tamaño fijo usando RellenarEspacios
+Concatenar todos los elementos formateados en una sola cadena
+Retornar la cadena
+
+Algoritto: MostrarListaVentas (Función)
+
+Propósito: Genera una cadena con el detalle de todos los registros de ventas.
+Parámetro de entrada: ventas (Matriz de Texto)
+Valor de retorno: Texto con la lista de ventas
+
+Obtener posventas (Entero) de la matriz ventas
+Inicializar salida (Texto) como vacía
+Para cada fila desde 0 hasta posventas:
+Llamar a MostrarVenta para la fila actual
+Añadir el resultado a salida
+Retornar salida
+
+Algoritmo: MenuPrincipal (Procedimiento)
+
+Propósito: Muestra el menú principal y coordina la navegación a los submenús.
+Parámetros de entrada: vproductos (Matriz de Texto), vventas (Matriz de Texto)
+Valor de retorno: Ninguno
+
+Definir opciones: Crear datosmenuprincipal (Arreglo de Texto) con las opciones del menú.
+Definir acciones: Crear acciones (Arreglo de Tareas).
+La acción "Productos" debe llamar a MenuProductos con vproductos.
+La acción "Punto de Venta" debe llamar a MenuPuntoVenta con vventas, el idticket actual y vproductos.
+La acción "Inventario" debe llamar a MenuInventario con vproductos.
+La acción "Listado de Ventas" debe llamar a MostrarListaVentas con vventas.
+La acción "Salida" debe imprimir un mensaje de despedida.
+Llamar a GestionarMenus con el título, opciones, acciones y salir en falso.
+
+Algoritmo: main (Procedimiento)
+Propósito: Es el punto de inicio que prepara y arranca la aplicación.
+Parámetros de entrada: args (Arreglo de Texto)
+Valor de retorno: Ninguno
+Cargar productos: Llamar a CargarProductos y guardar el resultado en la matriz productos.
+Crear ventas: Llamar a CrearVenta y guardar el resultado en la matriz ventas.
+Iniciar menú: Llamar a MenuPrincipal con productos y ventas.
